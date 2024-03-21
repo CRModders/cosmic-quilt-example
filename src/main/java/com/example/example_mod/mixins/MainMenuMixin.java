@@ -1,8 +1,6 @@
 package com.example.example_mod.mixins;
 
 import finalforeach.cosmicreach.gamestates.MainMenu;
-import org.quiltmc.loader.impl.util.log.Log;
-import org.quiltmc.loader.impl.util.log.LogCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
