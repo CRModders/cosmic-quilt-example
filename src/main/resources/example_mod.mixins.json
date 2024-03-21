@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.example_mod.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "MainMenuMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

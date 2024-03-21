@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+
+  "quilt_loader": {
+    "group": "${mod_group}",
+    "id": "${mod_id}",
+    "version": "${mod_version}",
+    "intermediate_mappings":"net.fabricmc:intermediary",
+
+    "metadata": {
+      "name": "${mod_name}",
+      "description": "A short description of your mod.",
+      "contributors": {
+        "Your name here": "Owner"
+      },
+      "contact": {
+        "homepage": "https://example.com/",
+        "issues": "https://codeberg.org/CRModders/cosmic-quilt-example/issues",
+        "sources": "https://codeberg.org/CRModders/cosmic-quilt-example"
+      },
+      "icon": "assets/example_mod/icon.png"
+    },
+
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": "*"
+      },
+      {
+        "id": "cosmic_reach",
+        "versions": "*"
+      }
+    ]
+  },
+
+  "mixin": "example_mod.mixins.json"
+}
