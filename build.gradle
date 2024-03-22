@@ -1,5 +1,4 @@
 plugins {
-    id "java-library"
     id "application"
     id "maven-publish"
 }
@@ -43,40 +42,28 @@ repositories {
 
 
 configurations {
-    cosmicreach
+    cosmicreach // Config to provide the Cosmic Reach project
+    compileOnly.extendsFrom(cosmicreach) // Allows cosmic reach to be used in the codebase
+
+    quiltMod // Config to be able to load Quilt Mods
+    implementation.extendsFrom(cosmicreach)
 }
 
 
 dependencies {
     // Cosmic Reach jar
-    cosmicreach "finalforeach:cosmicreach:${cosmic_reach_version}" // Allows it to be used later in the gradle configuration
-    implementation "finalforeach:cosmicreach:${cosmic_reach_version}" // Allows it to be referenced in the code
+    cosmicreach "finalforeach:cosmicreach:${cosmic_reach_version}"
 
     // Cosmic Quilt
-    implementation "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
+    quiltMod "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
 
-    //  The dependencies below are part of Cosmic Quilt
+
+    /// ========== NOTE: Following lines will no longer be needed in Cosmic Quilt 1.1.3 (once it releases) ========= ///
     // Quilt Loader
     implementation "org.quiltmc:quilt-loader:${quilt_loader_version}"
-    implementation "org.quiltmc:quilt-json5:${quilt_json_version}"
-    implementation "org.quiltmc:tiny-remapper:${quilt_remapper_version}"
-    implementation "org.quiltmc:quilt-config:${quilt_config_version}"
-    implementation "net.fabricmc:access-widener:${fabric_accesswidener_version}"
-    // Slf4j
-    implementation "org.slf4j:slf4j-api:${slf4j_version}"
-    implementation "org.slf4j:slf4j-jdk14:${slf4j_version}"
-    implementation "uk.org.lidalia:sysout-over-slf4j:${slf4j_sysout_helper_version}"
     // Mixins
     implementation "org.spongepowered:mixin:${mixin_version}"
     implementation "io.github.llamalad7:mixinextras-fabric:${mixinextras_version}" // Note: Despite it saying "fabric", its implementation is also for quilt
-    // Extra libraries
-    implementation "com.google.guava:guava:${guava_version}"
-    implementation "com.google.code.gson:gson:${gson_version}"
-    implementation "org.ow2.asm:asm:${asm_version}"
-    implementation "org.ow2.asm:asm-util:${asm_version}"
-    implementation "org.ow2.asm:asm-tree:${asm_version}"
-    implementation "org.ow2.asm:asm-analysis:${asm_version}"
-    implementation "org.ow2.asm:asm-commons:${asm_version}"
 }
 
 processResources {
@@ -106,11 +93,24 @@ application {
     mainClass = "org.quiltmc.loader.impl.launch.knot.KnotClient"
 }
 
+// Sets up all the Quilt Mods
+def String getQuiltModLocations(Configuration config) {
+    StringBuilder sb = new StringBuilder();
+    for (obj in config.allDependencies) {
+        sb.append(":" + config.files(obj)[0])
+    }
+    return sb.toString()
+}
+
 applicationDefaultJvmArgs = [
-        "-Dloader.skipMcProvider=true",
+        "-Dloader.skipMcProvider=true", // Stops Quilt from attempting to find mappings, and all the other Minecraft stuff
         "-Dloader.gameJarPath=" + configurations.cosmicreach.asPath, // Defines path to Cosmic Reach
-        "-Dloader.addMods=" + jar.archiveFile.get().asFile // Add the jar of this project
+        "-Dloader.addMods=" +
+                jar.archiveFile.get().asFile + // Add the jar of this project
+                getQuiltModLocations(configurations.quiltMod) // Adds the jars of any Quilt mods added
 ]
+println applicationDefaultJvmArgs[2]
+
 run {
     // To run this project in the game, depend on the creation of jar task
     dependsOn "jar"
