@@ -1,5 +1,3 @@
-import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
-
 plugins {
     id "application"
     id "maven-publish"
@@ -89,7 +87,7 @@ application {
 
 // Sets up all the Quilt Mods
 def String getQuiltModLocations(Configuration config) {
-    OperatingSystem os = DefaultNativePlatform.currentOperatingSystem
+    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem
     String separatorCharacter = ":"
     if (os.isWindows())
         separatorCharacter = ";" // Due to Windows drive letters being denoted using ":"'s, a ";" should be used instead
