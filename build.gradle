@@ -46,7 +46,7 @@ configurations {
     compileOnly.extendsFrom(cosmicreach) // Allows cosmic reach to be used in the codebase
 
     quiltMod // Config to be able to load Quilt Mods
-    implementation.extendsFrom(cosmicreach)
+    implementation.extendsFrom(quiltMod)
 }
 
 
