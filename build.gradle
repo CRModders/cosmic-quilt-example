@@ -101,7 +101,6 @@ applicationDefaultJvmArgs = [
                 jar.archiveFile.get().asFile + // Add the jar of this project
                 getQuiltModLocations(configurations.quiltMod) // Adds the jars of any Quilt mods added
 ]
-println applicationDefaultJvmArgs[2]
 
 run {
     // To run this project in the game, depend on the creation of jar task
