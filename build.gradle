@@ -56,14 +56,6 @@ dependencies {
 
     // Cosmic Quilt
     quiltMod "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
-
-
-    /// ========== NOTE: Following lines will no longer be needed in Cosmic Quilt 1.1.3 (once it releases) ========= ///
-    // Quilt Loader
-    implementation "org.quiltmc:quilt-loader:${quilt_loader_version}"
-    // Mixins
-    implementation "org.spongepowered:mixin:${mixin_version}"
-    implementation "io.github.llamalad7:mixinextras-fabric:${mixinextras_version}" // Note: Despite it saying "fabric", its implementation is also for quilt
 }
 
 processResources {
