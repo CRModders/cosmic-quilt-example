@@ -87,14 +87,9 @@ application {
 
 // Sets up all the Quilt Mods
 def String getQuiltModLocations(Configuration config) {
-    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem
-    String separatorCharacter = ":"
-    if (os.isWindows())
-        separatorCharacter = ";" // Due to Windows drive letters being denoted using ":"'s, a ";" should be used instead
-
     StringBuilder sb = new StringBuilder()
     for (obj in config.allDependencies) {
-        sb.append(separatorCharacter + config.files(obj)[0])
+        sb.append(File.pathSeparator + config.files(obj)[0])
     }
     return sb.toString()
 }
