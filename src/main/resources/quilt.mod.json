@@ -30,7 +30,7 @@
 
     "depends": [
       {
-        "id": "cosmic_quilt",
+        "id": "cosmicquilt",
         "versions": "*"
       },
       {
