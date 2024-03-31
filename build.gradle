@@ -99,11 +99,8 @@ def String getQuiltModLocations(Configuration config) {
 }
 
 applicationDefaultJvmArgs = [
-        "-Dloader.skipMcProvider=true", // Stops Quilt from attempting to find mappings, and all the other Minecraft stuff
+        "-Dloader.development=true", // Allows stuff to be found through the classpath
         "-Dloader.gameJarPath=" + configurations.cosmicreach.asPath, // Defines path to Cosmic Reach
-        "-Dloader.addMods=" +
-                jar.archiveFile.get().asFile + // Add the jar of this project
-                getQuiltModLocations(configurations.quiltMod) // Adds the jars of any Quilt mods added
 ]
 
 run {
