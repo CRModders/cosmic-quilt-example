@@ -62,7 +62,7 @@ dependencies {
     cosmicreach "finalforeach:cosmicreach:${cosmic_reach_version}"
 
     // Cosmic Quilt
-    implementation "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
+    internal "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
