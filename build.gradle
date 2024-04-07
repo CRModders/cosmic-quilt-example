@@ -44,6 +44,16 @@ repositories {
 configurations {
     cosmicreach // Config to provide the Cosmic Reach project
     compileOnly.extendsFrom(cosmicreach) // Allows cosmic reach to be used in the codebase
+
+    internal { // Allows to include something without it being in the maven (recommended to be used when including mods)
+        visible = false
+        canBeConsumed = false
+        canBeResolved = false
+    }
+    compileClasspath.extendsFrom(internal)
+    runtimeClasspath.extendsFrom(internal)
+    testCompileClasspath.extendsFrom(internal)
+    testRuntimeClasspath.extendsFrom(internal)
 }
 
 
@@ -56,7 +66,7 @@ dependencies {
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    implementation "com.github.CRModders:FluxAPI:${fluxapi_version}"
+//    internal "com.github.CRModders:FluxAPI:${fluxapi_version}"
 }
 
 processResources {
