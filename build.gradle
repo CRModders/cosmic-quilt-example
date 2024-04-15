@@ -71,7 +71,7 @@ dependencies {
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    internal "com.github.CRModders:FluxAPI:${fluxapi_version}"
+//    internal "dev.crmodders:fluxapi:${fluxapi_version}"
 }
 
 processResources {
