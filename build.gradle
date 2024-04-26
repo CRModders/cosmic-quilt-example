@@ -1,84 +1,34 @@
 plugins {
-    id "application"
-    id "maven-publish"
+    id "java"
     id "cosmicloom" version "1.0.0-dev"
+    id "maven-publish"
 }
-//apply plugin: "cosmicloom"
 
 
 repositories {
-    ivy {
-        name "Cosmic Reach"
-        url "https://github.com/CRModders/CosmicArchive/raw/main/"
-        patternLayout {
-            artifact "/Cosmic Reach-[revision].jar"
-        }
-        // This is required in Gradle 6.0+ as metadata file (ivy.xml) is mandatory
-        metadataSources {
-            artifact()
-        }
-
-        content {
-            includeGroup "finalforeach"
-        }
-    }
-
-    maven {
-        name "crmReleases"
-        url "https://maven.crmodders.dev/releases"
-    }
-
-    maven {
-        name "JitPack"
-        url "https://jitpack.io"
-    }
-    maven {
-        name "Quilt"
-        url "https://maven.quiltmc.org/repository/release"
-    }
-    maven {
-        name "Fabric"
-        url "https://maven.fabricmc.net/"
-    }
-    maven {
-        name "Sponge"
-        url "https://repo.spongepowered.org/maven/"
-    }
-
-    mavenCentral()
-}
-
-
-configurations {
-    cosmicreach // Config to provide the Cosmic Reach project
-    compileOnly.extendsFrom(cosmicreach) // Allows cosmic reach to be used in the codebase
-
-    internal { // Allows to include something without it being in the maven (recommended to be used when including mods)
-        visible = false
-        canBeConsumed = false
-        canBeResolved = false
-    }
-    compileClasspath.extendsFrom(internal)
-    runtimeClasspath.extendsFrom(internal)
-    testCompileClasspath.extendsFrom(internal)
-    testRuntimeClasspath.extendsFrom(internal)
+    // Add repositories to retrieve artifacts from in here.
+    // You should only use this when depending on other mods because
+    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repositories.
 }
 
 
 dependencies {
-    // Cosmic Reach jar
-    cosmicreach "finalforeach:cosmicreach:${cosmic_reach_version}"
+    cosmicReach(loom.getCosmicReach(cosmic_reach_version))
+    modImplementation(loom.getCosmicQuilt(cosmic_quilt_version))
 
-    // Cosmic Quilt
-    internal "dev.crmodders:cosmicquilt:${cosmic_quilt_version}"
+
     // Modmenu
-//    internal "dev.crmodders:modmenu:${modmenu_version}"
+//    modImplementation "dev.crmodders:modmenu:${modmenu_version}"
+
 
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    internal "dev.crmodders:fluxapi:${fluxapi_version}"
+//    modImplementation "dev.crmodders:fluxapi:${fluxapi_version}"
 }
+
 
 processResources {
     def resourceTargets = [ // Locations of where to inject the properties
@@ -104,29 +54,6 @@ processResources {
 
 loom {
     accessWidenerPath = file("src/main/resources/examplemod.accesswidener")
-}
-
-
-application {
-    // As Quilt is our loader, use its main class at:
-    mainClass = "org.quiltmc.loader.impl.launch.knot.KnotClient"
-}
-
-
-applicationDefaultJvmArgs = [
-        "-Dloader.development=true", // Allows stuff to be found through the classpath
-        "-Dloader.gameJarPath=" + configurations.cosmicreach.asPath, // Defines path to Cosmic Reach
-]
-
-run {
-    // To run this project in the game, depend on the creation of jar task
-    dependsOn "jar"
-
-    // Change the run directory
-    File runningDir = new File("run/")
-    if (!runningDir.exists())
-        runningDir.mkdirs()
-    tasks.run.workingDir = runningDir
 }
 
 
