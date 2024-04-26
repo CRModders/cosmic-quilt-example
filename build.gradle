@@ -1,7 +1,10 @@
 plugins {
     id "application"
     id "maven-publish"
+    id "cosmicloom" version "1.0.0-dev"
 }
+//apply plugin: "cosmicloom"
+
 
 repositories {
     ivy {
@@ -96,6 +99,11 @@ processResources {
     filesMatching(resourceTargets) {
         expand replaceProperties
     }
+}
+
+
+loom {
+    accessWidenerPath = file("src/main/resources/examplemod.accesswidener")
 }
 
 

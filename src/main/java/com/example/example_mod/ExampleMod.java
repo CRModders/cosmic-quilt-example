@@ -1,6 +1,7 @@
 package com.example.example_mod;
 
 import dev.crmodders.cosmicquilt.api.entrypoint.ModInitializer;
+import finalforeach.cosmicreach.gamestates.InGame;
 import org.quiltmc.loader.api.ModContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ public class ExampleMod implements ModInitializer {
 	@Override
 	public void onInitialize(ModContainer mod) {
 		LOGGER.info("Example Mod Initialized!");
+		System.out.println(InGame.player);
 	}
 }
 

@@ -1,1 +1,26 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+
+        // For debugging plugins
+        mavenLocal()
+    }
+}
+
+//buildscript() {
+//    repositories {
+//        maven {
+//            name "JitPack"
+//            url "https://jitpack.io"
+//        }
+//
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath "org.codeberg.CRModders:cosmic-loom:3a3fac8fe5"
+//    }
+//}
+
+
 rootProject.name = "ExampleMod"

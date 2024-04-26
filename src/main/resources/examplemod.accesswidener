@@ -1,0 +1,5 @@
+accessWidener v1 intermediary
+
+accessible field finalforeach/cosmicreach/gamestates/InGame player Lfinalforeach/cosmicreach/entities/Player;
+accessible field finalforeach/cosmicreach/gamestates/LoadingGame animTimer F
+accessible field finalforeach/cosmicreach/gamestates/GameState curWidth I
