@@ -5,6 +5,11 @@ plugins {
 }
 
 
+loom {
+    accessWidenerPath = file("src/main/resources/examplemod.accesswidener")
+}
+
+
 repositories {
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
@@ -15,13 +20,13 @@ repositories {
 
 
 dependencies {
+    // Cosmic Reach
     cosmicReach(loom.getCosmicReach(cosmic_reach_version))
+    // Cosmic Quilt
     modImplementation(loom.getCosmicQuilt(cosmic_quilt_version))
-
 
     // Modmenu
 //    modImplementation "dev.crmodders:modmenu:${modmenu_version}"
-
 
 
     // FluxAPI
@@ -49,11 +54,6 @@ processResources {
     filesMatching(resourceTargets) {
         expand replaceProperties
     }
-}
-
-
-loom {
-    accessWidenerPath = file("src/main/resources/examplemod.accesswidener")
 }
 
 
