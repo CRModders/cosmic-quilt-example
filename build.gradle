@@ -20,10 +20,6 @@ repositories {
         }
     }
 
-    maven {
-        name "crmReleases"
-        url "https://maven.crmodders.dev/releases"
-    }
 
     maven {
         name "JitPack"
@@ -41,6 +37,15 @@ repositories {
         name "Sponge"
         url "https://repo.spongepowered.org/maven/"
     }
+
+
+    /* // CRM repos, you may or may not want it. (you wont need it as CRMM stuff is also on jitpack)
+    maven {
+        name "crmReleases"
+        url "https://maven.crmodders.dev/releases"
+    }
+     */
+
 
     mavenCentral()
 }
@@ -67,14 +72,9 @@ dependencies {
     cosmicreach "finalforeach:cosmicreach:${cosmic_reach_version}"
 
     // Cosmic Quilt
-    internal "dev.crmodders:cosmicquilt:${cosmic_quilt_version}"
+    internal "org.codeberg.CRModders:cosmic-quilt:${cosmic_quilt_version}"
     // Modmenu
-//    internal "dev.crmodders:modmenu:${modmenu_version}"
-
-
-    // FluxAPI
-    //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    internal "dev.crmodders:fluxapi:${fluxapi_version}"
+//    internal "org.codeberg.CRModders:modmenu:${modmenu_version}"
 }
 
 processResources {
